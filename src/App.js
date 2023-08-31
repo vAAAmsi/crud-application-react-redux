@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { connect } from "react-redux";
+// import { View } from "./components/view/view.js";
+import View from './components/view/view'
+import { Route, Routes } from "react-router-dom";
+import Add from './components/add/add.js'
+import { Adding ,Delete } from "./Redux store/actions";
+import  Edit  from "../src/components/edit/edit.js"
 
-function App() {
+function App({state,Adding,Delete}) {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+        <Routes>
+          <Route path="/" element={<View  />}></Route>
+          <Route path="/add" element={<Add type = {Adding} />}></Route>
+          <Route path="/edit" element={<Edit />}></Route>
+        </Routes>
     </div>
   );
 }
 
-export default App;
+const mapStateToprop = (state) => (
+  {
+    state
+  }
+)
+
+export default connect(mapStateToprop,{Adding,Delete})  (App);
